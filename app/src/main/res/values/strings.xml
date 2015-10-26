@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PasswordManager</string>
+    <string name="action_settings">Settings</string>
+    <string name="pinHint">Enter 4 Digit Pin</string>
+    <string name="attemptsCount">Attempts Left:</string>
+    <string name="currentCount">5</string>
+</resources>
