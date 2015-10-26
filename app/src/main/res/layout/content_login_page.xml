@@ -30,9 +30,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/loginButton"
-        android:text="Click here to login"
+        android:text="Login"
         android:layout_below="@id/pwBox"
         android:layout_centerHorizontal="true"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerButton"
+        android:text="Register"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/changePin"
+        android:text="Change Pin"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentRight="true"
         />
     <TextView
         android:layout_width="wrap_content"

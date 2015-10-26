@@ -1,5 +1,7 @@
 package com.example.pvelasqu.passwordmanager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,27 +15,53 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.graphics.Color;
+import android.content.Intent;
 
 public class LoginPage extends AppCompatActivity {
     Button logIn;
+    Button registerButton;
+    Button changePinButton;
     EditText pwText;
     TextView viewCount;
     int counter;
+    String pw = "2405";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        SharedPreferences settings = getSharedPreferences("PASS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = settings.edit();
+
         logIn = (Button)findViewById(R.id.loginButton);
+        registerButton = (Button)findViewById(R.id.registerButton);
+        changePinButton = (Button)findViewById(R.id.changePin);
+
         pwText = (EditText)findViewById(R.id.pwBox);
         viewCount = (TextView)findViewById(R.id.count);
         counter = 5;
+        prefEditor.putString("Password", "2405");
+        prefEditor.commit();
+        pw = returnPass(settings);
+
+        registerButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(pw.equals("DEFAULT IF NOT FOUND")){
+                    startActivity(new Intent(LoginPage.this, registerActivity.class));
+                }else{
+                    Toast.makeText(getApplicationContext(), "Already Registered", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pwText.getText().toString().equals("2405")) {
+                if (pwText.getText().toString().equals(pw)) {
                     Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
@@ -73,4 +101,9 @@ public class LoginPage extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public String returnPass(SharedPreferences settings){
+        return settings.getString("Password", "DEFAULT IF NOT FOUND");
+
+    }
+
 }
